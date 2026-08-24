@@ -43,11 +43,12 @@ helm upgrade --install showroom . \
   -f values.yaml
 ```
 
-Or from a published Helm repo:
+Or from the published Helm repo:
 
 ```bash
-helm repo add showroom-deployer https://<your-chart-repo>
-helm upgrade --install showroom showroom-deployer/showroom-deployer \
+helm repo add eformat https://eformat.github.io/helm-charts
+helm repo update eformat
+helm upgrade --install showroom eformat/showroom-deployer \
   -n showroom-<slug> --create-namespace \
   -f values-<slug>.yaml
 ```
