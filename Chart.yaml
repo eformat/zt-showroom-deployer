@@ -1,0 +1,16 @@
+---
+apiVersion: v2
+name: showroom-deployer
+description: >
+  Reusable Helm chart that deploys a Red Hat "showroom" workshop content pod
+  (git-cloner + antora-builder init containers; nginx proxy, showroom-content,
+  and wetty web-terminal runtime containers) onto a running OpenShift cluster,
+  fronted by a Service and an edge-terminated Route.
+type: application
+version: 0.1.0
+appVersion: "1.4.2"
+keywords:
+  - showroom
+  - workshop
+  - antora
+  - openshift

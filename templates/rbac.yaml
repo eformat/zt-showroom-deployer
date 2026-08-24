@@ -1,0 +1,40 @@
+{{- if .Values.showroom.clusterSetup.enabled }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: showroom-cluster-setup-{{ .Values.showroom.namespace }}
+rules:
+  - apiGroups: ["operator.openshift.io"]
+    resources: ["ingresscontrollers"]
+    verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: showroom-cluster-setup-{{ .Values.showroom.namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: showroom
+    namespace: {{ .Values.showroom.namespace }}
+roleRef:
+  kind: ClusterRole
+  name: showroom-cluster-setup-{{ .Values.showroom.namespace }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
+{{- if .Values.showroom.rbac.namespaceEdit }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: edit-showroom-sa
+  namespace: {{ .Values.showroom.namespace }}
+subjects:
+  - kind: ServiceAccount
+    name: showroom
+    namespace: {{ .Values.showroom.namespace }}
+roleRef:
+  kind: ClusterRole
+  name: edit
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
