@@ -15,3 +15,6 @@ data:
     "openshift_cluster_ingress_domain": "{{ .Values.deployer.domain }}"
     "rhoai_dashboard_url": "https://rh-ai.{{ .Values.deployer.domain }}"
     "project_name": "{{ .Values.showroom.projectName }}"
+    {{- range $k, $v := .Values.showroom.extraAttributes }}
+    "{{ $k }}": "{{ $v }}"
+    {{- end }}
