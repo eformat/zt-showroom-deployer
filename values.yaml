@@ -28,6 +28,14 @@ showroom:
   # cluster-setup init container patches the default IngressController to strip
   # X-Frame-Options / Content-Security-Policy so the showroom iframe renders.
   # Requires the showroom-cluster-setup ClusterRole (cluster-scoped patch).
+  # Persistent storage for cloned repo and built site content. When disabled,
+  # an emptyDir is used (content is lost on pod restart).
+  persistence:
+    enabled: false
+    storageClass: ocs-external-storagecluster-ceph-rbd
+    size: 5Gi
+    accessMode: ReadWriteOnce
+
   clusterSetup:
     enabled: true
 
@@ -47,7 +55,7 @@ showroom:
     sshPass: changeme
 
   images:
-    oseCli: registry.redhat.io/openshift4/ose-cli:latest
+    oseCli: registry.redhat.io/openshift4/ose-cli-rhel9:latest
     gitCloner: quay.io/rhpds/git-cloner:v1.1.5
     antora: quay.io/rhpds/antora:v1.3.0
     content: quay.io/rhpds/showroom-content:v1.4.2

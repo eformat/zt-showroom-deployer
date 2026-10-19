@@ -188,7 +188,12 @@ spec:
               memory: 1Gi
       volumes:
         - name: showroom-files
+          {{- if .Values.showroom.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: showroom-files
+          {{- else }}
           emptyDir: {}
+          {{- end }}
         - name: user-data
           configMap:
             name: showroom-userdata

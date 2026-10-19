@@ -1,0 +1,18 @@
+{{- if .Values.showroom.persistence.enabled }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: showroom-files
+  namespace: {{ .Values.showroom.namespace }}
+spec:
+  accessModes:
+    - {{ .Values.showroom.persistence.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.showroom.persistence.size }}
+  {{- if .Values.showroom.persistence.storageClass }}
+  storageClassName: {{ .Values.showroom.persistence.storageClass }}
+  {{- end }}
+  volumeMode: Filesystem
+{{- end }}
