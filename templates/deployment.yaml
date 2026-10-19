@@ -93,6 +93,7 @@ spec:
             - name: ZT_UI_ENABLED
               value: {{ .Values.showroom.ztUiEnabled | quote }}
             - name: SHOWROOM_UI_CONFIG
+              value: {{ .Values.showroom.uiConfig | default "" | quote }}
             - name: DOMAIN
               value: {{ .Values.deployer.domain }}
             - name: GUID
